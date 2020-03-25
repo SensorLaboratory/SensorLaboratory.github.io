@@ -162,7 +162,7 @@ function showGravityCharts(userID, sensorName, databaseRef) {
 				newItems = true;
       });
 
-    }, 200);
+    }, 400);
   });
 }
 

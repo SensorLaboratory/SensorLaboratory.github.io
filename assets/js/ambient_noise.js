@@ -201,7 +201,7 @@ function showAmbientNoiseCharts(userID, sensorName, databaseRef) {
 				newItems = true;
       });
 
-    }, 200);
+    }, 400);
   });
 }
 

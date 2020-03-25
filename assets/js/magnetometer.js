@@ -162,7 +162,7 @@ function showMagnetometerCharts(userID, sensorName, databaseRef) {
 				newItems = true;
       });
 
-    }, 200);
+    }, 400);
   });
 }
 
