@@ -72,7 +72,7 @@ function getLocationData() {
 	for (var i = 0; i < locationSensorData.length; ++i) {
 		var value = locationSensorData[i].val();
 
-		content.push([getMomentDate(value.date).format('DD/MM/YYYY HH:mm:ss:SS'), value.latitude, value.longitude, value.utm_easting, value.utm_northing, value.zone]);
+		content.push([getMomentDate(value.date).format('DD/MM/YYYY HH:mm:ss:SS'), value.latitude, value.longitude, value.utm_easting, value.utm_northing, value.utm_zone]);
 	}
 
 	return content;
