@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Dashboard - Sensor Network </title>
+
+  <!-- Metadata -->
+  <meta charset="utf-8" />
+  <link rel="icon" href="assets/images/app/brand/IconRedSimplified.png" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+  <!--Plugin CSS file with desired skin-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+
+  <!-- Fontsawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- Our CSS files -->
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <link rel="stylesheet" href="assets/css/visualize_data.min.css" />
+  <link rel="stylesheet" href="assets/css/visualize_data.css" />
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-text mx-3 mt-5 pt-4"><span><img class="footer-header col-8" src="assets/images/app/brand/IconWhite.png"></span></div>
+                </a>
+                <ul class="nav navbar-nav text-light mt-5 pt-3" id="accordionSidebar" style="border-bottom:0px">
+                    <li id="sensor-selector" class="nav-item"><a class="nav-link"><i class="fas fa-mobile ml-3 mr-3"></i><span>Sensors</span></a></li>
+                    <li id="plugin-selector" class="nav-item"><a class="nav-link"><i class="fas fa-plug ml-3 mr-3"></i><span>Plugins</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="nav navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter">1</span><i class="fas fa-bell fa-fw"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
+                                        role="menu">
+                                        <h6 class="dropdown-header">alerts center</h6>
+                                        <a class="d-flex align-items-center dropdown-item" href="#">
+                                            <div class="mr-3">
+                                                <div class="bg-primary icon-circle"><i class="fas fa-bell text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">March 24, 2020</span>
+                                                <p>Do not trigger your location sensor! #stayathome <i class="fas fa-hands-wash"></i><i class="ml-1 fas fa-hand-holding-medical"></i><i class="ml-1 fas fa-virus"></i><i class="ml-1 fas fa-pump-soap"></i><i class="ml-1 fas fa-head-side-mask"></i></p>
+                                            </div>
+                                        </a>
+                                        <a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
+                                </div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow" role="presentation">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                      <span id="username" class="d-none d-lg-inline mr-2 text-gray-600 small"></span>
+                                      <img id="profileImage" class="border rounded-circle img-profile">
+                                    </a>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                                      <!--<div class="dropdown-divider"></div>-->
+                                      <a id="sign-out" class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                    </ul>
+            </div>
+            </nav>
+            <div class="container-fluid">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-dark mb-0">Dashboard</h3><p id="generate-report" class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</p></div>
+
+                <div class="row sensor-row">
+                    <!-- Accelerometer -->
+                  <div id="accelerometer-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-primary py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Accelerometer.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Motion sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Accelerometer</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barometer -->
+                    <div id="barometer-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-warning py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Barometer.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Ambient sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Barometer</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gravity -->
+                    <div id="gravity-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-primary py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Gravity.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Motion sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Gravity</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gyroscope -->
+                    <div id="gyroscope-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-primary py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Gyroscope.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Motion sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Gyroscope</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row sensor-row">
+                    <!-- Light -->
+                    <div id="light-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-warning py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Light.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Ambient sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Light</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div id="location-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-info py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Location.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Spatial sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Location</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Magnetometer -->
+                    <div id="magnetometer-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-warning py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Magnetometer.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Ambient sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Magnetometer</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proximity -->
+                    <div id="proximity-card" class="col-md-6 col-xl-3 mb-4 sensor-card">
+                        <div class="card shadow border-left-info py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/Proximity.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Spatial sensor</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Proximity</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row plugin-row">
+                    <!-- Activity recognition -->
+                    <div id="activity-recognition-card" class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-primary py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/ActivityRecognition.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Google Plugin</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Activity recognition</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ambient Noise -->
+                    <div id="ambient-noise-card" class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-left-warning py-2 sensor_plugin-card" style="background-image: url('assets/images/visualize/cards/AmbientNoise.png');">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Aware Plugin</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Ambient noise</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Start: Chart -->
+                <div id="chart-container">
+                </div>
+
+            <!-- End: Chart -->
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                  <div id="description-card" class="card shadow pb-3">
+                      <div class="card-header py-3">
+                          <h6 id="description-title" class="text-primary font-weight-bold m-0"></h6>
+                      </div>
+                      <div class="card-body">
+                          <p id="description-content" style="white-space: pre-line"></p>
+                      </div>
+                      <div class="card-body">
+                          <h6 id="reference-quote" class="font-weight-bold text-right">Quote from Aware platform</span></h6>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="text-primary font-weight-bold m-0">Historical data</h6>
+                            <div class="active-cyan-2"><input id="timestamp-input" class="form-control" type="text" placeholder="Search timestamp" aria-label="Search"></div>
+                        </div>
+                        <div class="pl-3 pr-3">
+                          <table id="sensor-data-list" class="table table-sm">
+                          </table>
+                        </div>
+
+                        <button id="display-more-rows" type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to TOP button -->
+    <a href="#page-top" class="scroll-top-button"></a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <!--Plugin JavaScript file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+
+    <!-- Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <!-- Our scripts -->
+    <script src="assets/js/csv.js"></script>
+    <script src="assets/js/md5.js"></script>
+    <script src="assets/js/scroll.js"></script>
+    <script src="assets/js/sensor_ui.js"></script>
+    <script src="assets/js/accelerometer.js"></script>
+    <script src="assets/js/activity_recognition.js"></script>
+    <script src="assets/js/ambient_noise.js"></script>
+    <script src="assets/js/barometer.js"></script>
+    <script src="assets/js/gravity.js"></script>
+    <script src="assets/js/gyroscope.js"></script>
+    <script src="assets/js/light.js"></script>
+    <script src="assets/js/location.js"></script>
+    <script src="assets/js/magnetometer.js"></script>
+    <script src="assets/js/proximity.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/visualize_data.js"></script>
+
+    <!-- Firebase -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-database.js"></script>
+</body>
+
+<footer class="sticky-footer" style="background-color: transparent;">
+    <div class="row justify-content-center">
+      <img class="footer-header col-3 col-sm-3 col-md-3 col-lg-2 col-xl-1" src="assets/images/app/brand/Iconblack.png">
+    </div>
+    <div class="container my-auto mt-4">
+      <div class="text-center my-auto copyright text-secondary"><span>© Copyright 2020 | Juan Jesús Cárdenas Labella & Alfonso López Ruiz | All Rights Reserved</span></div>
+    </div>
+ </footer>
+
+</html>

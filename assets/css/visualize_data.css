@@ -1,0 +1,117 @@
+.btn-circle {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.4rem 0rem;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.42857;
+}
+
+#display-more-rows {
+  position: absolute;
+  right: 1rem;
+  bottom: -1.5rem;
+}
+
+#description-card, .sensor_plugin-card {
+  background-size: contain;
+  background-color: #FFFFFF;               /* Default bg, similar to the background's base color*/
+  background-position: right bottom;      /* Positioning*/
+  background-repeat: no-repeat;
+}
+
+#sensor-data-list tr, th {
+  font-size: 0.8rem;
+}
+
+#sensor-data-list tr:nth-child(2n+2) {
+  background-color: #fcfcfc;
+}
+
+#sensor-data-list tr:not(:first-child):hover {
+  background-color: rgba(78, 115, 223, 0.07);
+}
+
+#sensor-data-list.table tr:first-child th {
+  border-top-style: none;
+}
+
+.sensor-card > .card, .sensor-card > .card .text-uppercase {
+  transition: all 0.4s ease-in-out;
+}
+
+.sensor-card > .card.active {
+  filter: saturate(0.3) drop-shadow(0rem 0rem 0.3rem rgba(78, 115, 223, 0.6));
+  border-left: 0.25rem solid #f23860 !important;
+}
+
+.sensor-card > .card.active .text-uppercase {
+  color: #f23860 !important;
+}
+
+.sensor-card > .card:not(.active):hover {
+  cursor: pointer;
+  border-left: 0.25rem solid #f23860 !important;
+  filter: drop-shadow(0rem 0rem 0.3rem rgba(78, 115, 223, 0.6));
+}
+
+.sensor-card > .card:not(.active):hover .text-uppercase {
+  color: #f23860 !important;
+}
+
+.sidebar-dark .nav-link, .sidebar-dark .nav-item .nav-link i {
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-dark .nav-link:hover, .sidebar-dark .nav-item .nav-link:hover i {
+  cursor: pointer;
+}
+
+#description-content {
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+#zoom-slider {
+  width: 32rem;
+  margin: auto;
+}
+
+.chart-area {
+  height: 30rem;
+}
+
+.irs--flat .irs-bar, .irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
+  background-color: #4e73df;
+}
+
+.irs--flat .irs-from::before, .irs--flat .irs-to::before, .irs--flat .irs-single::before {
+  border-top-color: #4e73df;
+}
+
+.irs--flat .irs-handle > i:first-child {
+  background-color: #3e5cb3;
+}
+
+.irs--flat .irs-handle.state_hover > i:first-child, .irs--flat .irs-handle:hover > i:first-child {
+  background-color: #224abe;
+}
+
+@media only screen and (min-width: 576px) {
+  #sensor-data-list tr, th {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .chart-area {
+    height: 20rem;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .chart-area {
+    height: 15rem;
+  }
+}
