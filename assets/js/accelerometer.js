@@ -162,7 +162,7 @@ function showAccelerometerCharts(userID, sensorName, databaseRef) {
 				newItems = true;
       });
 
-    }, 200);
+    }, 500);
   });
 }
 
