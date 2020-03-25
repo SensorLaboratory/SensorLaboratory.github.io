@@ -61,7 +61,8 @@ function addProximityValue(chart, date, value) {
 }
 
 function cleanProximityChart(chart) {
-
+	chart.data.labels = [];
+	chart.data.datasets[0].data = [];
 }
 
 function getProximityData() {
