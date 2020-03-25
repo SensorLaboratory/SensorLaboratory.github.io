@@ -28,8 +28,7 @@ $(document).ready(function() {
       // First plot
       $('#accelerometer-card').trigger('click');
     } else {
-      console.log('Hola');
-      //document.location.href = 'login.html';      // Go back
+      document.location.href = 'login.html';      // Go back
     }
   });
 

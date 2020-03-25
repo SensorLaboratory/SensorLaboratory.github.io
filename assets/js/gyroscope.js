@@ -162,7 +162,7 @@ function showGyroscopeCharts(userID, sensorName, databaseRef) {
 				newItems = true;
       });
 
-    }, 500);
+    }, 200);
   });
 }
 

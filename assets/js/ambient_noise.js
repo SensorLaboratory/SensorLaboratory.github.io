@@ -201,7 +201,7 @@ function showAmbientNoiseCharts(userID, sensorName, databaseRef) {
 				newItems = true;
       });
 
-    }, 150);
+    }, 200);
   });
 }
 
@@ -300,7 +300,6 @@ function updateBinaryChart(chartID, chart) {
 }
 
 function updateDecibelsChart(chartID, chart) {
-	console.log(chartID);
 	var index = 0;
   var value = $('#' + chartID).find(".js-range-slider").prop("value");
 
