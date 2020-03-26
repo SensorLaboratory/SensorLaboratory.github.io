@@ -33,6 +33,9 @@ var proximityConfig = {
 				}
 			}],
 			yAxes: [{
+				ticks: {
+					beginAtZero: true
+				},
 				scaleLabel: {
 					display: true,
 					labelString: 'Binary or cm'
