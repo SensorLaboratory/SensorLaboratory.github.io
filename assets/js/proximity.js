@@ -71,7 +71,7 @@ function cleanProximityChart(chart) {
 function getProximityData() {
 	var content = [];
 
-	for (var i = 0; i < proxmitySensorData.length; ++i) {
+	for (var i = 0; i < proximitySensorData.length; ++i) {
 		var value = proximitySensorData[i].val();
 
 		content.push([getMomentDate(value.date).format('DD/MM/YYYY HH:mm:ss:SS'), value.proximity]);
